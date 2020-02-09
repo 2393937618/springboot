@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+		<meta charset="utf-8">
+		<title>登录界面</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+	<script type="text/javascript" src="/webjars/jquery/1.9.0/jquery.js">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$("#button").click(function () {
+				//获取输入框的值
+				var id = $("#id").val();
+				var password = $("#password").val();
+				//整合成数据包
+				var all = {
+					id:id,password:password
+				};
+				//通过ajax的方式发送给loginController
+				$.ajax({
+					type:"POST",
+					url:"/check_password",		//标识要与loginController的一样
+					data:all,					//发送的数据
+					dataType:"text",			//返回接收到的数据格式
+					success:function (data) {	//成功执行的操作
+						if(data == 1){			//data为返回的数据
+							alert("登录成功");
+							window.location.href="/main";		//跳转到注册register页面
+
+						}
+						else if (data == 2){
+							alert("登录成功");
+							window.location.href="/main2";
+						} else {
+							alert("登录失败，请检查账号密码");
+							window.location.href="/login";		//跳转到登录index页面
+						}
+
+
+					},
+					error:function () {			//失败执行的操作
+						alert("失败啦！刷新一下")
+					}
+				})
+			});
+
+
+		});
+	</script>
+
+	</head>
+    <style>
+	.login_box1{
+	width: 360px;
+	height:300px;
+	background: #FFFFFF;
+	margin: 0px auto;
+	}
+	</style>
+	<body>
+		<div class="wrap login_wrap">
+			<div class="content">
+				<div class="logo"></div>
+				<div class="login_box1">
+					<h6>账号：1001   密码：456</h6>
+					<div class="login_form">
+						<div class="login_title">
+							登录
+						</div>
+						<form action="/login" method="post">
+							
+							<div class="form_text_ipt">
+								<input name="id" type="text" placeholder="工号 " id="id">
+							</div>
+							<div class="ececk_warning"><span>工号不能为空</span></div>
+							<div class="form_text_ipt">
+								<input name="password" type="password" placeholder="密码" id="password">
+							</div>
+							<div class="ececk_warning"><span>密码不能为空</span></div>
+							<div class="form_check_ipt">
+							</div>
+							<div class="form_btn">
+								<button type="button" id="button">登录</button>
+							</div>
+							<div class="form_reg_btn">
+								<span>还没有帐号？</span><a href="/r">马上注册</a>
+							</div>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/common.js" ></script>
+		<div style="text-align:center;">
+</div>
+	</body>
+</html>

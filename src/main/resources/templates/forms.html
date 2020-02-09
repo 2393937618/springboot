@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科研成果后台管理系统的forms</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<style>
+.a{
+	float:left;}
+</style>
+<script>
+function a(){
+	$("#5,#6,#7,#8").show();
+	$("#7,#8").hide();
+	$("#11").attr("placeholder","论文标题");
+	$("#22").attr("placeholder","作者");
+	$("#33").attr("placeholder","发表时间");
+	$("#44").attr("placeholder","杂志名称");
+	$("#55").attr("placeholder","版次");
+	$("#66").attr("placeholder","类别");
+}
+function b(){
+	$("#5,#6,#7,#8").show();
+	$("#11").attr("placeholder","书名");
+	$("#22").attr("placeholder","作者");
+	$("#33").attr("placeholder","发表时间");
+	$("#44").attr("placeholder","出版社名称");
+	$("#55").attr("placeholder","获奖情况");
+	$("#66").attr("placeholder","封面");
+	$("#77").attr("placeholder","目录");
+	$("#88").attr("placeholder","出版信息");
+}
+function c(){
+	$("#5,#6,#7,#8").show();
+	$("#7,#8").hide();
+	$("#11").attr("placeholder","项目名称");
+	$("#22").attr("placeholder","主持者");
+	$("#33").attr("placeholder","参与者");
+	$("#44").attr("placeholder","立项时间");
+	$("#55").attr("placeholder","项目类别");
+	$("#66").attr("placeholder","项目的级别");
+}
+function d(){
+	$("#5,#6,#7,#8").show();
+	$("#6,#7,#8").hide();
+	$("#11").attr("placeholder","专利名称");
+	$("#22").attr("placeholder","主持者");
+	$("#33").attr("placeholder","参与者");
+	$("#44").attr("placeholder","时间");
+	$("#55").attr("placeholder","专利的级别");
+
+
+}
+function e(){
+	$("#5,#6,#7,#8").show();
+	$("#5,#6,#7,#8").hide();
+	$("#1 span").text("获奖名称");
+	$("#2 span").text("获奖时间");
+	$("#3 span").text("获奖级别");
+	$("#4 span").text("获奖证书");
+	$("#11").attr("placeholder","获奖名称");
+	$("#22").attr("placeholder","获奖时间");
+	$("#33").attr("placeholder","获奖级别");
+	$("#44").attr("type","file");
+
+
+	// $("#submit").click(function () {
+	//
+	// 	alert("asd");
+	//
+	// 	$.ajax({
+	// 		type:"POST",
+	// 		url:"/submit_result",
+	// 		data:"",
+	//
+	// 	})
+	// })
+}
+
+</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="/main"><span class="glyphicon glyphicon-dashboard"></span> 成果分析</a></li>
+			<li  class="active"><a href="/forms"><span class="glyphicon glyphicon-pencil"></span> 上传成果</a></li>
+			<li><a href="/show"><span class="glyphicon glyphicon-info-sign"></span> 展示成果</a></li>
+			<li class="parent ">
+				<a href="#">
+					<span class="glyphicon glyphicon-list"></span> 更多 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 1
+						</a>
+					</li>
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 2
+						</a>
+					</li>
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 3
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li role="presentation" class="divider"></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
+		</ul>
+
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li class="active">Forms</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h3 class="page-header">科研成果上传</h3>
+			</div>
+		</div><!--/.row-->
+				
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">论文上传</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<form role="form">
+
+								<div class="form-group has-warning" id="1">
+									<span>论文标题</span>
+									<input class="form-control" placeholder="论文标题" id="11">
+								</div>
+								<div class="form-group has-error" id="2">
+									<span>作者</span>
+									<input class="form-control" placeholder="作者" id="22">
+								</div>
+                                <div class="form-group has-success" id="3">
+									<span>发表时间</span>
+									<input class="form-control" placeholder="发表时间" id="33">
+								</div>
+								<div class="form-group has-warning" id="4">
+									<span>杂志名称</span>
+									<input class="form-control" placeholder="杂志名称" id="44">
+								</div>
+								<div class="form-group has-error" id="5">
+									<span>版次</span>
+									<input class="form-control" placeholder="版次" id="55">
+								</div>
+                                <div class="form-group has-success" id="6">
+									<span>类别</span>
+									<input class="form-control" placeholder="类别" id="66">
+								</div>
+								<div class="form-group has-warning" hidden id="7">
+									<span>论文标题</span>
+									<input class="form-control" placeholder="Warning" id="77">
+								</div>
+								<div class="form-group has-error" hidden id="8">
+									<span>论文标题</span>
+									<input class="form-control" placeholder="Error" id="88">
+								</div>
+                                
+							</form>
+							</div>
+							<div class="col-md-6">
+							
+								
+								<div class="form-group">
+									<label>Radio Buttons</label>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"  onClick="a()" checked>论文
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onClick="b()">著名教材
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" onClick="c()">立项
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios4" value="option4" onClick="d()">专利
+										</label>
+									</div>
+                                    <div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios5" value="option5" onClick="e()" >获奖成果
+										</label>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary" id="submit">提交</button>
+								<button type="reset" class="btn btn-default">清空</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div><!-- /.col-->
+		</div><!-- /.row -->
+		
+	</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+
+
+
+		$(document).ready(function () {
+			$("#submit").click(function () {
+				var certificate = document.getElementById('44').files[0].name
+				var name = $("#11").val()
+				var time = $("#22").val()
+				var level = $("#33").val()
+
+				var data = {
+					name:name,
+					time : time,
+					level : level,
+					certificate : certificate
+				}
+
+				$.ajax({
+					type:"POST",
+					url:"/upload_result",
+					data:data,
+					datatype:"text",
+					success:function (data) {
+						if (data==1){
+							alert("插入成功")
+							window.location.href="/forms";
+						} else {
+							alert("插入失败，请重试")
+							window.location.href="/forms";
+						}
+
+					},
+					error:function (error) {
+						console.log(error)
+						alert("错误！请刷新页面"+error);
+					}
+
+				})
+
+
+			})
+		})
+
+
+
+	</script>	
+</body>
+
+</html>

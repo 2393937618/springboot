@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{margin: 1%}
+    </style>
+    <title>啊啊</title>
+</head>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+    // if(!sessionStorage.getItem("name")){
+    //     window.location.href="err.html";
+    // }
+    $(document).ready(function () {
+        $("#btn").click(function () {
+
+            var formData = new FormData();
+
+
+            var s = $("#file")[0];
+
+
+            alert(s)
+
+
+        })
+
+        $("input[type='file']").change(function(){
+            var file = this.files[0];
+            if (window.FileReader) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                //监听文件读取结束后事件
+                reader.onloadend = function (e) {
+                    $(".weui_uploader_file").css("background-image","url("+e.target.result+")");
+                    //e.target.result就是最后的路径地址
+                    alert(e.target.result)
+                    console.log(e.target.result)
+                };
+            }
+        });
+    })
+</script>
+<body>
+
+<!--<form action="http://localhost/php/upimage.php" method="post" enctype="multipart/form-data" name="upload_form">-->
+    <label>选择商品图片</label>
+    <input name="imgfile" type="file" accept="imageInfo/gif, imageInfo/jpeg,imageInfo/jpg,imageInfo/png" id="file"/>
+    <input name="upload" type="submit" value="上传"  id="btn"/>
+<div class="weui_uploader_file" style="height: 300px ;width: 300px; background: no-repeat" ></div>
+<!--</form>-->
+
+
+<br/>
+<br/>
+
+
+<form action="insert.php" method="post" enctype="multipart/form-data" name="upload_form">
+
+    <h4>请添加商品信息</h4>
+    <input type="text" placeholder="商品ID" id="goods_id" name="goods_id">
+    <input type="text" placeholder="商品名称" id="goods_name" name="goods_name">
+    <div id="show"></div>
+    <input type="text" placeholder="商品数量" id="goods_num" name="goods_num">
+    <input type="text" placeholder="商品信息" id="goods_info" name="goods_info">
+    <input type="file" placeholder="商品图片" id="goods_image" name="goods_image"
+           accept="image/gif, image/jpeg,image/jpg,image/png">
+    <input type='submit' value='添加'>
+</form>
+
+<div>
+    <a href="goods.php">
+        <butto>浏览商品</butto>
+    </a>
+</div>
+</body>
+</html>

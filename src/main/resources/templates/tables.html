@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科研后台管理系统</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/bootstrap-table.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+   <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+			text-align:center;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+	   .update{
+		   background: #f5fafa;
+	   }
+</style>
+
+	<script type="text/javascript" src="/webjars/jquery/1.9.0/jquery.js">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$(".delete").click(function (e) {
+				var id = e.target.id;
+				var mid = id.substring(0,id.length-6);
+				console.log(mid)
+				var all = {
+					mid:mid
+				};
+				$("#myModalLabel1").text("删除");
+				$("#myModal1").modal();
+
+				$.ajax({
+					type:"POST",
+					url:"/send_id_delete",
+					data:all,
+					datatype:"text",
+					success:function () {
+						console.log("send_id_delete");
+					}
+				});
+			});
+
+			$("#btn_submit1").click(function () {
+				$.ajax({
+					type:"POST",
+					url:"/teacher_delete",
+					datatype:"text",
+					success:function (data) {
+						if(data == 1){
+							alert("删除成功");
+							window.location.href="/tables";
+						}else {
+							alert("删除出错，请重新尝试");
+						}
+
+
+					},
+					error:function () {
+						alert("出错啦!");
+					}
+				});
+
+			});
+
+
+
+
+
+
+			$(".update").click(function (e) {
+				var id = e.target.id;
+				var all = {
+					id:id
+				};
+				$("#myModalLabel").text("更新");
+				$('#myModal').modal();
+
+				$.ajax({
+					type:"POST",
+					url:"/send_teacher_id",
+					data:all,
+					dataType:"json",
+					success:function (data) {
+						$("#id").val(data[0].id);
+						$("#username").val(data[0].username);
+						$("#password").val(data[0].password);
+						$("#work_in").val(data[0].work_in);
+						$("#user_position").val(data[0].user_position);
+						$("#user_call").val(data[0].user_call);
+
+					},
+					error:function () {
+						alert("报错啦！刷新一下")
+					}
+				})
+
+			});
+
+
+
+
+			$("#btn_submit").click(function () {
+				//获取输入框的值
+				var id = $("#id").val();
+				var username = $("#username").val();
+				var password = $("#password").val();
+				var work_in = $("#work_in").val();
+				var user_position = $("#user_position").val();
+				var user_call = $("#user_call").val();
+				console.log(user_position)
+				//整合成数据包
+				var all = {
+					id:id,username:username,password:password,work_in:work_in,user_position:user_position,user_call:user_call
+				};
+
+				$.ajax({
+					type:"POST",
+					url:"/update_teacher",
+					data:all,
+					datatype:"text",
+					success:function (data) {
+
+						if(data == 1){			//data为返回的数据
+							alert("更新成功");
+							window.location.href="/tables";		//跳转到注册register页面
+
+						}
+						else{
+							alert("更新失败，请重新试一下");
+							window.location.href="/tables";		//跳转到登录index页面
+						}
+
+					}
+				})
+			})
+
+
+
+
+				// $.ajax({
+				// 	type:"POST",
+				// 	url:"/show_teacher",
+				// 	dataType:"json",
+				// 	success:function(data){
+				// 		console.log(data)
+				// 		// var str="";
+				// 		var str = "";
+				// 		var str_btn="";
+				// 		var tr = "tr";
+				// 	$.each(data,function (i,v)
+				// 	{
+				//
+				// 		str+="<tr>"+
+				// 				"<td>"+data[i].id+"</td>"+
+				// 				"<td>"+data[i].username+"</td>"+
+				// 				"<td>"+data[i].password+"</td>"+
+				// 				"<td>"+data[i].work_in+"</td>"+
+				// 				"<td>"+data[i].user_position+"</td>"+
+				// 				"<td>"+data[i].user_call+"</td>"+
+				// 				"<td><button>upload</button><button>delete</button></td>"+
+				// 				"</tr>";
+				//
+				//
+				//
+				// 	});
+				// 	$("#table").append(str)
+				// 	}
+				// });
+
+
+
+
+
+			})
+	</script>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+
+			<li class="active"><a href="/tables"><span class="glyphicon glyphicon-list-alt"></span> 教师信息管理</a></li>
+			<li><a href="/main2"><span class="glyphicon glyphicon-pencil"></span> 总成果分析</a></li>
+			<li><a href="/show2"><span class="glyphicon glyphicon-info-sign"></span> 总成果展示</a></li>
+			<li class="parent ">
+				<a href="#">
+					<span class="glyphicon glyphicon-list"></span> 更多 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+				</a>
+			
+			</li>
+			<li role="presentation" class="divider"></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-user"></span>登录</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li class="active">Tables</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h3 class="page-header">教师信息管理</h3>
+			</div>
+		</div><!--/.row-->
+				
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">教师信息管理
+
+					</div>
+					<div class="panel-body">
+				
+                
+                
+                
+                
+                
+<table width="90%" class="table" id="table">
+        <thead id="thread">
+            <tr id="tr" class="tr">
+            <th>工号</th><th>姓名</th><th>密码</th><th>入职时间</th><th>职位</th><th>职称</th><th> </th>
+            </tr>
+        </thead>
+
+	<tr th:each = "i:${show_teacher}">
+		<td th:text = "${i.id}"></td>
+		<td th:text = "${i.username}"></td>
+		<td th:text = "${i.password}"></td>
+		<td th:text = "${i.work_in}"></td>
+		<td th:text = "${i.user_position}"></td>
+		<td th:text = "${i.user_call}"></td>
+		<td><button th:id="${i.id}" class="update">update</button><button class="delete" th:id="${i.id}+'delete'">delete</button></td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+
+
+						<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel1">删除</h4>
+									</div>
+									<div class="modal-body">
+
+										确定要删除吗？
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+										<button type="button" id="btn_submit1" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>确定</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">更新</h4>
+									</div>
+									<div class="modal-body">
+
+										<div class="form-group">
+											<label for="id">工号</label>
+											<input type="text" name="txt_departmentname" class="form-control" id="id" placeholder="部门名称">
+										</div>
+										<div class="form-group">
+											<label for="username">姓名</label>
+											<input type="text" name="txt_parentdepartment" class="form-control" id="username" placeholder="上级部门">
+										</div>
+										<div class="form-group">
+											<label for="password">密码</label>
+											<input type="text" name="txt_departmentlevel" class="form-control" id="password" placeholder="部门级别">
+										</div>
+										<div class="form-group">
+											<label for="work_in">入职时间</label>
+											<input type="text" name="txt_statu" class="form-control" id="work_in" placeholder="状态">
+										</div>
+										<div class="form-group">
+											<label for="user_position">职位</label>
+											<input type="text" name="txt_departmentlevel" class="form-control" id="user_position" placeholder="部门级别">
+										</div>
+										<div class="form-group">
+											<label for="user_call">职称</label>
+											<input type="text" name="txt_departmentlevel" class="form-control" id="user_call" placeholder="部门级别">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+										<button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+<!--	<script src="js/chart-data.js"></script>-->
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-table.js"></script>
+
+</body>
+
+</html>

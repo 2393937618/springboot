@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: a
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/final?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 426520
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+  mvc:
+    view:
+      suffix: .html
+      prefix: classpath:/templates/
+      mode: HTML5
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: true
+    mode: HTML5

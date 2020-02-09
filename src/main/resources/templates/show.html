@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>蓝色响应式后台管理系统html模板 - 我爱模板网 www.5imoban.net</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+	<style type="text/css">
+		table
+		{
+			border-collapse: collapse;
+			margin: 0 auto;
+			text-align: center;
+		}
+		table td, table th
+		{
+			border: 1px solid #cad9ea;
+			color: #666;
+			text-align:center;
+			height: 30px;
+		}
+		table thead th
+		{
+			background-color: #CCE8EB;
+			width: 100px;
+		}
+		table tr:nth-child(odd)
+		{
+			background: #fff;
+		}
+		table tr:nth-child(even)
+		{
+			background: #F5FAFA;
+		}
+		.update{
+			background: #f5fafa;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="/main"><span class="glyphicon glyphicon-dashboard"></span> 成果分析</a></li>
+			<li><a href="/forms"><span class="glyphicon glyphicon-pencil"></span> 上传成果</a></li>
+			<li  class="active"><a href="/show"><span class="glyphicon glyphicon-info-sign"></span> 展示成果</a></li>
+			<li class="parent ">
+				<a href="#">
+					<span class="glyphicon glyphicon-list"></span> 更多 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 1
+						</a>
+					</li>
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 2
+						</a>
+					</li>
+					<li>
+						<a class="" href="#">
+							<span class="glyphicon glyphicon-share-alt"></span> Sub Item 3
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li role="presentation" class="divider"></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-user"></span> 登录</a></li>
+		</ul>
+
+	</div><!--/.sidebar-->
+		
+	<div class="col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li class="active">Elements</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h3 class="page-header">&nbsp;&nbsp;&nbsp;教师科研成果</h3>
+			</div>
+		</div><!--/.row-->
+		</thead>
+
+<!--		<tr th:each = "i:${show_book}">-->
+<!--			<td th:text = "${i.tid}"></td>-->
+<!--			<td th:text = "${i.title}"></td>-->
+<!--			<td th:text = "${i.author}"></td>-->
+<!--			<td th:text = "${i.publication}"></td>-->
+<!--			<td th:text = "${i.publisher}"></td>-->
+<!--			<td th:text = "${i.edition_num}"></td>-->
+<!--			<td th:text = "${i.award}"></td>-->
+
+<!--		</tr>-->
+
+<!--		</table>-->
+		
+
+				<div class="alert bg-warning" role="alert">
+
+										<div class="panel-heading">获奖情况</div>
+										<table width="90%" class="table" id="table">
+											<thead id="thread">
+											<tr id="tr" class="tr">
+												<th>工号</th><th>获奖名称</th><th>获奖时间</th><th>获奖级别</th><th>获奖证书</th>
+											</tr>
+											</thead>
+
+											<tr th:each = "i:${show_result}">
+												<td th:text = "${i.tid}"></td>
+												<td th:text = "${i.name}"></td>
+												<td th:text = "${i.time}"></td>
+												<td th:text = "${i.level}"></td>
+												<td><img th:src="'../img/'+${i.certificate}" width="50px" height="50px"></td>
+											</tr>
+
+										</table>
+
+
+					<div class="panel-heading">著作教材</div>
+					<table width="90%" class="table" id="table1">
+						<thead id="thread1">
+						<tr id="tr1" class="tr">
+							<th>书名</th><th>作者</th><th>发表时间</th><th>获奖证书</th><th>获奖情况</th><th>封面</th>
+						</tr>
+						</thead>
+
+						<tr th:each = "i:${show_book}">
+							<td th:text = "${i.title}"></td>
+							<td th:text = "${i.author}"></td>
+							<td th:text = "${i.publication}"></td>
+							<td th:text = "${i.publisher}"></td>
+							<td th:text = "${i.edition_num}"></td>
+							<td th:text = "${i.award}"></td>
+						</tr>
+
+
+					</table>
+
+
+
+					<div class="panel-heading">论文</div>
+					<table width="90%" class="table" id="table2">
+						<thead id="thread2">
+						<tr id="tr2" class="tr">
+
+							<th>论文题目</th><th>作者</th><th>发表时间</th><th>期刊名称</th><th>版次</th><th>类别</th>
+						</tr>
+						</thead>
+
+						<tr th:each = "i:${show_paper}">
+							<td th:text = "${i.title}"></td>
+							<td th:text = "${i.author}"></td>
+							<td th:text = "${i.date}"></td>
+							<td th:text = "${i.journal_name}"></td>
+							<td th:text = "${i.edition}"></td>
+							<td th:text = "${i.category}"></td>
+						</tr>
+
+					</table>
+
+
+
+					<div class="panel-heading">立项</div>
+					<table width="90%" class="table" id="table3">
+						<thead id="thread3">
+						<tr id="tr3" class="tr">
+							<th>项目名称</th><th>主持者</th><th>参与者</th><th>获奖证书</th><th>项目类别</th><th>项目级别</th>
+						</tr>
+						</thead>
+
+						<tr th:each = "i:${show_patent}">
+							<td th:text = "${i.name}"></td>
+							<td th:text = "${i.sponsor}"></td>
+							<td th:text = "${i.participant}"></td>
+							<td th:text = "${i.time}"></td>
+							<td th:text = "${i.level}"></td>
+							<td th:text = "${i.certificate}"></td>
+						</tr>
+
+					</table>
+
+
+
+					<div class="panel-heading">专利</div>
+					<table width="90%" class="table" id="table4">
+						<thead id="thread4">
+						<tr id="tr4" class="tr">
+							<th>专利名称</th><th>主持者</th><th>参与者</th><th>时间</th><th>专利级别</th>
+						</tr>
+						</thead>
+
+						<tr th:each = "i:${show_project}">
+							<td th:text = "${i.organizer}"></td>
+							<td th:text = "${i.participant}"></td>
+							<td th:text = "${i.estable_time}"></td>
+							<td th:text = "${i.category}"></td>
+							<td th:text = "${i.level}"></td>
+
+						</tr>
+
+					</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									</div>
+				</div>
+
+
+
+
+
+				</div>
+
+			</div>
+		</div><!--/.row-->		
+		
+		
+		
+			
+		
+		
+		
+		
+		
+	</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>
